@@ -22,7 +22,7 @@ class Create extends Component
     /**
      * @throws AuthorizationException
      */
-    public function tweet()
+    public function tweet(): void
     {
         $this->authorize('create', Tweet::class);
 
@@ -36,5 +36,6 @@ class Create extends Component
         ]);
 
         $this->emit('tweet::created');
+        $this->reset('body');
     }
 }
