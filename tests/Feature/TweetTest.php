@@ -8,7 +8,7 @@ use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Livewire\livewire;
 
-it('should be able to create a tweet', function($tweet) {
+it('should be able to create a tweet', function ($tweet) {
 
     $user = User::factory()->create();
 
@@ -27,7 +27,7 @@ it('should be able to create a tweet', function($tweet) {
 
 })->with(['my first tweet', 'my second tweet', 'my third tweet',]);
 
-it('should make sure that only authenticated users can tweet', function() {
+it('should make sure that only authenticated users can tweet', function () {
     livewire(Create::class)
         ->set('body', 'This is my first tweet')
         ->call('tweet')
@@ -41,7 +41,7 @@ it('should make sure that only authenticated users can tweet', function() {
         ->assertEmitted('tweet::created');
 });
 
-test('the tweet body is required', function() {
+test('the tweet body is required', function () {
     actingAs(User::factory()->create());
 
     livewire(Create::class)
@@ -50,7 +50,7 @@ test('the tweet body is required', function() {
         ->assertHasErrors(['body' => 'required']);
 });
 
-test('the tweet body should have a max length of 140 characters', function() {
+test('the tweet body should have a max length of 140 characters', function () {
     actingAs(User::factory()->create());
 
     livewire(Create::class)
@@ -60,7 +60,7 @@ test('the tweet body should have a max length of 140 characters', function() {
 });
 
 
-it('should show the tweet on the timeline', function() {
+it('should show the tweet on the timeline', function () {
     actingAs(User::factory()->create());
 
     livewire(Create::class)
@@ -72,7 +72,7 @@ it('should show the tweet on the timeline', function() {
         ->assertSee('This is my first tweet');
 });
 
-it('should set body as null after tweeting', function (){
+it('should set body as null after tweeting', function () {
     actingAs(User::factory()->create());
 
     livewire(Create::class)
