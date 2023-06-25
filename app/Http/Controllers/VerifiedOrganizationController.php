@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 
-class SubscribeController extends Controller
+class VerifiedOrganizationController extends Controller
 {
     public function __invoke()
     {
@@ -13,11 +14,11 @@ class SubscribeController extends Controller
 
         $user->createOrGetStripeCustomer();
 
-        if ($user->subscribed('default')) {
+        if ($user->subscribed('verified-org')) {
             return $user->redirectToBillingPortal();
         }
 
-        return $user->newSubscription('default', 'price_1NLlacFMi4sxdEN8HxC9ERge')
+        return $user->newSubscription('verified-org', 'price_1NMzReFMi4sxdEN8t9tZ3GdX')
             ->checkout()
             ->redirect();
     }

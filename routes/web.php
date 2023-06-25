@@ -19,14 +19,19 @@ use App\Http\Middleware\Authenticate;
 */
 
 Route::get('/', function () {
-    Auth::login(User::first());
+    auth()->loginUsingId(2);
 
-    return view('dashboard');
+    return view('twitter');
 })->name('home');
+
 
 Route::view('twitter', 'twitter')->name('twitter');
 Route::get('subscribe', SubscribeController::class)
     ->name('subscribe')
+    ->middleware([Authenticate::class]);
+
+Route::get('verified-organization', \App\Http\Controllers\VerifiedOrganizationController::class)
+    ->name('verified-organization')
     ->middleware([Authenticate::class]);
 
 //Route::get('/', function () {

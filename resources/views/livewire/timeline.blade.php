@@ -1,9 +1,7 @@
-<div class="mt-10 text-black text-lg w-full">
-    <button wire:click="loadMore">Load More</button>
+<div class="text-white text-lg w-full">
+
     @foreach($tweets as $tweet)
-        <div>
-            {{ $loop->index + 1 }} - {{ $tweet->body }}
-        </div>
+        <x-tweet :tweet="$tweet"/>
     @endforeach
 
     <div class="bg-blue-400 h-10 w-10" x-data="{
