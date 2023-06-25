@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubscribeController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\Authenticate;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +22,12 @@ Route::get('/', function () {
     Auth::login(User::first());
 
     return view('dashboard');
-})->name('dashboard');
+})->name('home');
 
 Route::view('twitter', 'twitter')->name('twitter');
+Route::get('subscribe', SubscribeController::class)
+    ->name('subscribe')
+    ->middleware([Authenticate::class]);
 
 //Route::get('/', function () {
 //    return view('welcome');
